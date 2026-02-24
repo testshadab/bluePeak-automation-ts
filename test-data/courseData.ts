@@ -1,4 +1,21 @@
 export const courseData = {
   title: "Automation Course 2026",
-  durationDays: 30
+  durationDays: 30,
+  sectionTitle: "Automation Section",
+  audioTitle: "Automation Audio",
+  videoTitle:"Automation Video",
+  documentTitle:"Automation doc",
+  contentTitle:"Automation content",
+  htmlContent:"This is automated HTML content added via Playwright.",
+  webTitle:"Automation web",
+  demoLink:"www.test.com",
+  pictureTitle: "Automation picture",
+  scormTitle: "Automation scorm",
+  testName: "Automation test course",
+  durationHours: '2',
+  durationMinutes: '0',
+  passingMarks: '35',
+  maxAttempt: '2',
+  name: 'Automation import test',
+  templateName: '[QA Onboarding] LMS (Learning Management System)'
 };

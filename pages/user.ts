@@ -1,6 +1,9 @@
 import { Page } from '@playwright/test';
 import { LoginPage } from '../pages/LoginPage.page.js';
 import { ManagePage } from '../pages/ManagePage.page.js';
+import { ManageCourseResourcePage } from '../pages/ManageCourseResourcePage.page.js';
+import { ManageCoursePage } from './ManageCourseDetailsPage.page.js';
+
 
 /**
  * User (session) that holds all page objects for a single browser page.
@@ -18,6 +21,9 @@ export class User {
     //   private _dashboardPage?: DashboardPage;
     //   private _myLearningPage?: MyLearningPage;
     private _managePage?: ManagePage;
+    private _manageCourseDetailsPage?: ManageCoursePage;
+    private _manageCourseResourcePage?: ManageCourseResourcePage;
+
 
     constructor(page: Page) {
         this.page = page;
@@ -42,4 +48,17 @@ export class User {
         if (!this._managePage) this._managePage = new ManagePage(this.page);
         return this._managePage;
     }
+
+    get manageCourseDetailsPage(): ManageCoursePage {
+        if (!this._manageCourseDetailsPage) this._manageCourseDetailsPage = new ManageCoursePage(this.page);
+        return this._manageCourseDetailsPage;
+    }
+
+    get manageCourseResourcePage(): ManageCourseResourcePage {
+        if (!this._manageCourseResourcePage) {
+            this._manageCourseResourcePage = new ManageCourseResourcePage(this.page);
+        }
+        return this._manageCourseResourcePage;
+    }
+
 }

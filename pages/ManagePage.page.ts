@@ -1,5 +1,6 @@
 import { Page, Locator, expect } from '@playwright/test';
 import { BasePage } from '../pages/BasePage.page.js';
+import { courseData } from '../test-data/courseData.js';
 
 
 export class ManagePage extends BasePage {
@@ -15,8 +16,7 @@ export class ManagePage extends BasePage {
     private readonly durationInput: Locator;
     private readonly saveButton: Locator;
     private readonly notificationIcon: Locator;
-    private readonly resourcesTab: Locator;
-    private readonly addSectionButton: Locator;
+
 
     constructor(page: Page) {
         super(page);
@@ -31,9 +31,7 @@ export class ManagePage extends BasePage {
         this.courseIdInput = page.getByPlaceholder('Course ID');
         this.titleInput = page.getByPlaceholder('Title');
         this.saveButton = this.page.locator('button[type="submit"].btn-blue');
-        this.notificationIcon = this.page.locator('i.material-icons.notifications');
-        this.resourcesTab = this.page.locator('#resources-tab');
-        this.addSectionButton = this.page.getByRole('button', { name: '+ ADD SECTION' });
+        this.notificationIcon = this.page.locator('i.material-icons.notifications').last();
 
 
     }
@@ -101,11 +99,4 @@ export class ManagePage extends BasePage {
         await expect(this.notificationIcon).toBeVisible();
     }
 
-    async addResourceSection(): Promise<void> {
-        await this.waitForElement(this.resourcesTab);
-        await this.resourcesTab.click();
-        await this.waitForElement(this.addSectionButton);
-        await this.addSectionButton.click();
-        
-    }
 }

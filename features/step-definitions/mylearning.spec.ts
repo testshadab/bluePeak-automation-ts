@@ -9,6 +9,7 @@ import { courseData } from '../../test-data/courseData.js';
 test.describe('My Learnings', () => {
 
     test('navigate Manage and Courses after UI login', async ({ page, uiLogin }) => {
+        test.setTimeout(120000);
         const user = new User(page);
 
         await test.step('Go to Manage and open Courses', async () => {
@@ -21,32 +22,92 @@ test.describe('My Learnings', () => {
             await expect(page).toHaveURL(/add-course/i);
         });
 
-        await test.step('Select Self-Paced training method', async () => {
+        await test.step('Enter all the reqired course details and click on save button', async () => {
             await user.managePage.selectSelfPaced();
             await user.managePage.isSelfPacedSelected()
-        });
-
-        await test.step('Enter duration days', async () => {
             await user.managePage.enterDurationDays(courseData.durationDays);
-        });
-
-        await test.step('Generate and store Course ID', async () => {
             await user.managePage.generateAndStoreCourseId();
             // Optional validation
             expect(user.managePage.generatedCourseId).not.toBeNull();
-        });
-
-        await test.step('Enter Course Title', async () => {
             await user.managePage.enterCourseTitle(courseData.title);
-        });
-
-        await test.step('Click on save button', async () => {
             await user.managePage.clickSave()
+            await user.manageCourseResourcePage.validateNotificationIcon();
         });
 
-        await test.step('Validate success notification icon', async () => {
-            await user.managePage.validateNotificationIcon();
+        await test.step('Set Registration Alert Message', async () => {
+            await page.waitForURL(new RegExp('courses/manage-course', 'i'), { timeout: 60000 });
+            expect.soft(page).toHaveURL(new RegExp('courses/manage-course', 'i'));
+            await user.manageCourseDetailsPage.setRegistrationAlertMessage();
         });
 
+        await test.step('Set Prerequisites', async () => {
+            await user.manageCourseDetailsPage.SetPrerequisites();
+        });
+
+        await test.step('Set Course Access', async () => {
+            await user.manageCourseDetailsPage.SetCourseAccess();
+        });
+
+        await test.step('Set Learning Objective', async () => {
+            await user.manageCourseDetailsPage.SetLearningObjective();
+        });
+        await test.step('Set Course Fee', async () => {
+            await user.manageCourseDetailsPage.SetCourseFee();
+        });
+
+
+
+        await test.step('click on resource tab and add section', async () => {
+            await user.manageCourseResourcePage.addSection()
+            await user.manageCourseResourcePage.validateNotificationIcon();
+
+        });
+
+        await test.step('Add audio resource', async () => {
+            await user.manageCourseResourcePage.addAudioResource()
+            await user.manageCourseResourcePage.validateNotificationIcon();
+        });
+
+        await test.step('Add video resource', async () => {
+            await user.manageCourseResourcePage.addVideoResource()
+            await user.manageCourseResourcePage.validateNotificationIcon();
+        });
+
+        await test.step('Add document resource', async () => {
+            await user.manageCourseResourcePage.addDocumentResource()
+            await user.manageCourseResourcePage.validateNotificationIcon();
+        });
+
+        await test.step('Add content resource', async () => {
+            await user.manageCourseResourcePage.addContentResource()
+            await user.manageCourseResourcePage.validateNotificationIcon();
+        });
+
+        await test.step('Add web resource', async () => {
+            await user.manageCourseResourcePage.addWebLinkResource()
+            await user.manageCourseResourcePage.validateNotificationIcon();
+        });
+
+        await test.step('Add picture resource', async () => {
+            await user.manageCourseResourcePage.addPictureResource()
+            await user.manageCourseResourcePage.validateNotificationIcon();
+        });
+
+        await test.step('Add picture resource', async () => {
+            await user.manageCourseResourcePage.addScormResource()
+            await user.manageCourseResourcePage.validateNotificationIcon();
+        });
+
+        await test.step('Add picture resource', async () => {
+            await user.manageCourseResourcePage.addTestResource()
+            await user.manageCourseResourcePage.validateNotificationIcon();
+        });
+
+        await test.step('imort test', async () => {
+            await user.manageCourseResourcePage.importTest()
+            await user.manageCourseResourcePage.validateNotificationIcon();
+            await page.pause()
+        });
     });
+
 });
