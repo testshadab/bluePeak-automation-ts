@@ -1,0 +1,26 @@
+# Reports
+reports/
+downloadfile/
+
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# Environment
+.env
+.env.local
+
+# Screenshots and videos
+*.png
+*.mp4
+*.webm
+
+# IDE
+.idea/
+.vscode/
+
+# OS
+.DS_Store
+
