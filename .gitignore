@@ -2,7 +2,7 @@
 reports/
 downloadfile/
 playwright-report/
-test-result/
+test-results/
 
 # Dependencies
 node_modules/
