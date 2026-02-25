@@ -1,7 +1,7 @@
 # Reports
 reports/
 downloadfile/
-playwrightreport/
+playwright-report/
 test-result/
 
 # Dependencies
