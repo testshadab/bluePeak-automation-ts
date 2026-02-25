@@ -1,6 +1,8 @@
 # Reports
 reports/
 downloadfile/
+playwrightreport/
+test-result/
 
 # Dependencies
 node_modules/
@@ -12,10 +14,6 @@ dist/
 .env
 .env.local
 
-# Screenshots and videos
-*.png
-*.mp4
-*.webm
 
 # IDE
 .idea/

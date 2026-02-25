@@ -17,5 +17,9 @@ export const courseData = {
   passingMarks: '35',
   maxAttempt: '2',
   name: 'Automation import test',
-  templateName: '[QA Onboarding] LMS (Learning Management System)'
+  templateName: '[QA Onboarding] LMS (Learning Management System)',
+  selectTemplate: '[QA Onboarding] LMS Survey',
+  surveysName: 'Automation surveys',
+  documentType: '(Course folder)',
+  document: 'Automation documents'
 };

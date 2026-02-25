@@ -33,6 +33,9 @@ export class ManageCoursePage extends BasePage {
     private readonly feeAmount: Locator;
     private readonly notificationIcon: Locator;
     private readonly notificationCloseButton: Locator;
+    private readonly detailsTab: Locator;
+    private readonly publishButton: Locator;
+    private readonly confirmYesButton: Locator;
     constructor(page: Page) {
         super(page);
 
@@ -53,7 +56,7 @@ export class ManageCoursePage extends BasePage {
         this.PrerequisitesSaveButton = this.page.getByLabel('Prerequisites').getByRole('button', { name: 'Save' })
         this.prerequisitesPopupMessage = this.page.getByText('Course prerequisites have been added successfully');
         this.roleInput = this.page.getByRole('combobox', { name: 'Type Name' });
-        this.selectRole = this.page.getByText('Role -[Misc] L1');
+        this.selectRole = this.page.getByText('Role -Employee');
         this.courseAccessSaveButton = this.page.getByLabel('Course Access').getByRole('button', { name: 'Save' })
         this.learningObjectiveButton = this.page.getByRole('button', { name: 'add Add Learning Objective' })
         this.learningObjectiveMessage = this.page.getByRole('textbox', { name: 'Enter Learning Objective' })
@@ -67,6 +70,9 @@ export class ManageCoursePage extends BasePage {
         this.feeAmount = this.page.locator('input[name="amount"][type="number"]');
         this.notificationIcon = this.page.locator('i.material-icons.notifications').last();
         this.notificationCloseButton = this.page.locator('[role="alert"] button.close, [data-notify-position] button.close');
+        this.detailsTab = this.page.locator('#details-tab');
+        this.publishButton = this.page.getByRole('button', { name: 'Publish' });
+        this.confirmYesButton = this.page.getByRole('button', { name: 'Yes' });
 
     }
 
@@ -143,7 +149,7 @@ export class ManageCoursePage extends BasePage {
         await test.step('Set Course Fee', async () => {
             await this.courseFee.click();
             await this.addFeeButton.click();
-            await this.feeType.click({delay:1000});
+            await this.feeType.click({ delay: 1000 });
             await this.tuitionFee.click();
             await this.description.type('Test Description');
             await this.optionalCheckbox.click();
@@ -155,5 +161,30 @@ export class ManageCoursePage extends BasePage {
             await this.courseFee.click();
         });
 
+    }
+
+    async publishCourse(): Promise<void> {
+        await test.step('Publish Course', async () => {
+
+            // Click Details tab
+            await this.waitForElement(this.detailsTab);
+            await this.clickElement(this.detailsTab);
+
+            // Click Publish button
+            await this.waitForElement(this.publishButton);
+            await this.clickElement(this.publishButton);
+
+            await this.waitForElement(this.confirmYesButton);
+            await this.clickElement(this.confirmYesButton);
+
+            // Wait for success notification
+            await this.waitForElement(this.notificationIcon);
+            await expect(this.notificationIcon).toBeVisible();
+
+            // Close toast
+            await this.closeNotification();
+
+
+        });
     }
 }

@@ -270,7 +270,7 @@ export class ManageCourseResourcePage extends BasePage {
         const passingMarks = courseData.passingMarks;
         const maxAttempt = courseData.maxAttempt;
 
-        await this.parentSectionDropdown.click();
+        await this.parentSectionDropdown.click({delay:2000});
         await this.page.getByRole('option', { name: sectionTitle }).click();
 
         await this.testNameInput.waitFor({ state: 'visible', timeout: 10000 });

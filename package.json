@@ -1,7 +1,7 @@
 {
-  "name": "@carcloud/ai-qa-tests",
+  "name": "bluepeak",
   "version": "1.0.0",
-  "description": "AI QA testing framework for CarCloud chatbot - Cucumber BDD with Playwright",
+  "description": "bluepeak",
   "private": true,
   "type": "module",
   "scripts": {

@@ -3,6 +3,8 @@ import { LoginPage } from '../pages/LoginPage.page.js';
 import { ManagePage } from '../pages/ManagePage.page.js';
 import { ManageCourseResourcePage } from '../pages/ManageCourseResourcePage.page.js';
 import { ManageCoursePage } from './ManageCourseDetailsPage.page.js';
+import { ManageCourseSurveysPage } from '../pages/ManageCourseSurveysPage.page.js';
+import { ManageCourseDocumentsPage } from '../pages/ManageCourseDocumentsPage.page.js';
 
 
 /**
@@ -23,6 +25,8 @@ export class User {
     private _managePage?: ManagePage;
     private _manageCourseDetailsPage?: ManageCoursePage;
     private _manageCourseResourcePage?: ManageCourseResourcePage;
+    private _manageCourseSurveysPage?: ManageCourseSurveysPage;
+    private _manageCourseDocumentsPage?: ManageCourseDocumentsPage;
 
 
     constructor(page: Page) {
@@ -59,6 +63,20 @@ export class User {
             this._manageCourseResourcePage = new ManageCourseResourcePage(this.page);
         }
         return this._manageCourseResourcePage;
+    }
+
+    get manageCourseSurveysPage(): ManageCourseSurveysPage {
+        if (!this._manageCourseSurveysPage) {
+            this._manageCourseSurveysPage = new ManageCourseSurveysPage(this.page);
+        }
+        return this._manageCourseSurveysPage;
+    }
+
+    get manageCourseDocumentsPage(): ManageCourseDocumentsPage {
+        if (!this._manageCourseDocumentsPage) {
+            this._manageCourseDocumentsPage = new ManageCourseDocumentsPage(this.page);
+        }
+        return this._manageCourseDocumentsPage;
     }
 
 }
