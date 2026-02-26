@@ -3,6 +3,8 @@ reports/
 downloadfile/
 playwright-report/
 test-results/
+allure-report/
+allure-results/
 
 # Dependencies
 node_modules/

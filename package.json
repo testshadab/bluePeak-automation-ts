@@ -5,30 +5,25 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "cucumber-js --config cucumber.cjs --parallel 3",
-    "test:smoke": "cross-env TEST_PROFILE=smoke cucumber-js --config cucumber.cjs --profile smoke --tags @smoke --parallel 3 --format json:reports/cucumber-json/booking-report.json",
-    "test:booking": "cross-env TEST_PROFILE=booking cucumber-js --config cucumber.cjs --profile booking --tags @booking --parallel 3 --format json:reports/cucumber-json/booking-report.json",
-    "test:no-booking": "cross-env TEST_PROFILE=no-booking cucumber-js --config cucumber.cjs --profile no-booking --tags @no-booking --parallel 3 --format json:reports/cucumber-json/booking-report.json",
-    "test:multi-Tab": "cross-env TEST_PROFILE=multi-Tab cucumber-js --config cucumber.cjs --profile multi-Tab --tags @multi-Tab --parallel 3 --format json:reports/cucumber-json/booking-report.json",
-    "test:tag": "cucumber-js --config cucumber.cjs --tags",
-    "clean": "node -e \"const fs=require('fs'); const path=require('path'); ['reports', 'test-results'].forEach(dir => {try {fs.rmSync(path.join(__dirname, dir), {recursive: true, force: true}); fs.mkdirSync(path.join(__dirname, dir), {recursive: true});} catch (e) {console.error(e)}});\"",
-    "report": "open reports/cucumber-report.html",
+    "test": "playwright test",
+    "test:smoke": "playwright test --grep @smoke",
+    "test:headed": "playwright test --headed",
+    "clean": "node -e \"const fs=require('fs'); const path=require('path'); ['allure-results', 'allure-report', 'test-results', 'playwright-report'].forEach(dir => {try {fs.rmSync(path.join(__dirname, dir), {recursive: true, force: true});} catch (e) {console.error(e)}});\"",
+    "allure:generate": "allure generate allure-results --clean",
+    "allure:open": "allure open allure-report",
     "lint": "eslint . --ext .ts",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@playwright/test": "^1.40.0",
     "dotenv": "^17.2.3",
-    "multiple-cucumber-html-reporter": "^3.8.0",
-    "openai": "^4.76.0",
     "playwright": "^1.40.0",
     "xlsx": "^0.18.5"
   },
   "devDependencies": {
-    "@cucumber/cucumber": "^12.4.0",
     "@types/node": "^22.19.3",
-    "cross-env": "^7.0.3",
-    "tsx": "^4.19.0",
+    "allure-commandline": "^2.37.0",
+    "allure-playwright": "^3.5.0",
     "typescript": "^5.0.0"
   }
 }
