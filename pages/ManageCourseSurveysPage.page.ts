@@ -65,6 +65,7 @@ export class ManageCourseSurveysPage extends BasePage {
         await this.surveysName.fill(surveysName)
 
         await this.saveAndNextButton.click();
+        await this.validateNotificationIcon();
     }
 
 }

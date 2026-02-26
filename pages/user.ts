@@ -5,6 +5,8 @@ import { ManageCourseResourcePage } from '../pages/ManageCourseResourcePage.page
 import { ManageCoursePage } from './ManageCourseDetailsPage.page.js';
 import { ManageCourseSurveysPage } from '../pages/ManageCourseSurveysPage.page.js';
 import { ManageCourseDocumentsPage } from '../pages/ManageCourseDocumentsPage.page.js';
+import { TrainingEventsPage } from '../pages/TrainingEventsPage.page.js';
+import { MyLearningPage } from '../pages/MyLearningPage.page.js';
 
 
 /**
@@ -27,6 +29,8 @@ export class User {
     private _manageCourseResourcePage?: ManageCourseResourcePage;
     private _manageCourseSurveysPage?: ManageCourseSurveysPage;
     private _manageCourseDocumentsPage?: ManageCourseDocumentsPage;
+    private _trainingEventsPage?: TrainingEventsPage;
+    private _myLearningPage?: MyLearningPage;
 
 
     constructor(page: Page) {
@@ -79,4 +83,17 @@ export class User {
         return this._manageCourseDocumentsPage;
     }
 
+    get trainingEventsPage(): TrainingEventsPage {
+        if (!this._trainingEventsPage) {
+            this._trainingEventsPage = new TrainingEventsPage(this.page);
+        }
+        return this._trainingEventsPage;
+    }
+
+    get myLearningPage(): MyLearningPage {
+        if (!this._myLearningPage) {
+            this._myLearningPage = new MyLearningPage(this.page);
+        }
+        return this._myLearningPage;
+    }
 }

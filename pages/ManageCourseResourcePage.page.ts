@@ -38,7 +38,7 @@ export class ManageCourseResourcePage extends BasePage {
     constructor(page: Page) {
         super(page);
         this.notificationIcon = this.page.locator('i.material-icons.notifications');
-        this.closeNotificationIcon = this.page.locator('[class*="close-notify-alert"]').last()
+        this.closeNotificationIcon = this.page.locator('[class="close mat-button"]').last()
         this.resourcesTab = this.page.locator('#resources-tab');
         this.addSectionButton = this.page.getByRole('button', { name: 'ADD SECTION' });
         this.sectionTitleInput = this.page.getByPlaceholder('Title');
@@ -94,6 +94,7 @@ export class ManageCourseResourcePage extends BasePage {
     async validateNotificationIcon(): Promise<void> {
         // await expect(this.notificationIcon).toBeVisible();
         await this.notificationIcon.waitFor({ state: 'visible', timeout: 20000 })
+        await this.page.waitForTimeout(1000)
         if (await this.closeNotificationIcon.isVisible()) {
             await this.closeNotificationIcon.click({ force: true });
         }
@@ -121,6 +122,8 @@ export class ManageCourseResourcePage extends BasePage {
             timeout: 10000
         });
         await this.modalSaveButton.click();
+
+        await this.validateNotificationIcon()
     }
 
     async addAudioResource(): Promise<void> {
@@ -140,6 +143,8 @@ export class ManageCourseResourcePage extends BasePage {
         await this.fileInput.setInputFiles('test-data/Software_Testing_Audio.mp3');
 
         await this.modalSaveButton.click();
+
+        await this.validateNotificationIcon()
     }
 
     async addVideoResource(): Promise<void> {
@@ -159,6 +164,8 @@ export class ManageCourseResourcePage extends BasePage {
         await this.fileInput.setInputFiles('test-data/Manage Courses- Prerequisites.mp4');
 
         await this.modalSaveButton.click();
+
+        await this.validateNotificationIcon()
     }
 
     async addDocumentResource(): Promise<void> {
@@ -178,6 +185,8 @@ export class ManageCourseResourcePage extends BasePage {
         await this.fileInput.setInputFiles('test-data/Software_Testing_Overview.pdf');
 
         await this.modalSaveButton.click();
+
+        await this.validateNotificationIcon();
     }
 
     async addContentResource(): Promise<void> {
@@ -197,6 +206,7 @@ export class ManageCourseResourcePage extends BasePage {
         await this.htmlEditor.click();
         await this.htmlEditor.fill(htmlContent);
         await this.modalSaveButton.click();
+        await this.validateNotificationIcon();
     }
 
     async addWebLinkResource(): Promise<void> {
@@ -216,6 +226,7 @@ export class ManageCourseResourcePage extends BasePage {
         await this.linkInputField.click();
         await this.linkInputField.fill(demoLink);
         await this.modalSaveButton.click();
+        await this.validateNotificationIcon();
     }
 
     async addPictureResource(): Promise<void> {
@@ -235,6 +246,8 @@ export class ManageCourseResourcePage extends BasePage {
         await this.fileInput.setInputFiles('test-data/Software Testing Image.png');
 
         await this.modalSaveButton.click();
+
+        await this.validateNotificationIcon();
     }
 
     async addScormResource(): Promise<void> {
@@ -254,6 +267,8 @@ export class ManageCourseResourcePage extends BasePage {
         await this.fileInput.setInputFiles('test-data/SCORM_file.zip');
 
         await this.modalSaveButton.click();
+
+        await this.validateNotificationIcon();
     }
 
     async addTestResource(): Promise<void> {
@@ -286,6 +301,8 @@ export class ManageCourseResourcePage extends BasePage {
         await this.maxAttemptsInput.fill(maxAttempt)
 
         await this.modalSaveButton.click();
+
+        await this.validateNotificationIcon();
     }
 
     async importTest(): Promise<void> {
@@ -305,5 +322,6 @@ export class ManageCourseResourcePage extends BasePage {
         await this.page.getByRole('option', { name: templateName }).click();
 
         await this.modalSaveButton.click();
+        await this.validateNotificationIcon();
     }
 }

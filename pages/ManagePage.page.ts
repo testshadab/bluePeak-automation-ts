@@ -99,4 +99,22 @@ export class ManagePage extends BasePage {
         await expect(this.notificationIcon).toBeVisible();
     }
 
+    async enterCourseDetails(): Promise<void> {
+        await this.selectSelfPaced();
+        await this.isSelfPacedSelected()
+        await this.enterDurationDays(courseData.durationDays);
+        await this.generateAndStoreCourseId();
+        expect(this.generatedCourseId).not.toBeNull();
+        await this.enterCourseTitle(courseData.title);
+        await this.clickSave()
+        await this.validateNotificationIcon();
+    }
+
+    getGeneratedCourseId(): string {
+        if (!this.generatedCourseId) {
+            throw new Error('Course ID has not been generated yet.');
+        }
+        return this.generatedCourseId;
+    }
+
 }
